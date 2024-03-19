@@ -9,14 +9,14 @@ services:
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_PASSWORD = ${}
+      - POSTGRES_PASSWORD = ${CONTRASEÑA}
       - POSTGRES_DB = ${BASE_DE_DATOS}
       - POSTGRES_USER = ${USUARIO}
       - PGDATA = /var/lib/postgresql/data
-    volumes:
+    volumes: # Es lo que vincula es host con el contenedor. Es lo que vincula los datos de la "RAM" y los persiste en el disco.
       # Es buena práctica path relativo desde el proyecto ./_data:/lib/postgresql.
       - ./_data:/lib/postgresql
-    restart: always
+    restart: always # Para que se ejecute cada vez que arranca Docker.
 
 networks:
   redinterna:

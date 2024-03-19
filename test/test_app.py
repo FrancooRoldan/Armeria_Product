@@ -13,7 +13,7 @@ class TestApp(unittest.TestCase):
     self.app_context.pop()
 
   def test_app(self):
-    self.assertIsNone(current_app) #Testea si hay conexión
+    self.assertIsNotNone(current_app) #Testea si hay conexión
 
 if __name__ == '__main__':
   unittest.main()
