@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  postgresql: # Es único, se puede poner cualquier nombre pero no se puede repetir.
+    container_name: postgresql-servidor # Este es opcional. Pero no se puede repetir con otras imágenes.
+    image: postgres:15.4-bullseye
+
+    networks:
+      - redinterna
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_PASSWORD = ${}
+      - POSTGRES_DB = ${BASE_DE_DATOS}
+      - POSTGRES_USER = ${USUARIO}
+      - PGDATA = /var/lib/postgresql/data
+    volumes:
+      # Es buena práctica path relativo desde el proyecto ./_data:/lib/postgresql.
+      - ./_data:/lib/postgresql
+    restart: always
+
+networks:
+  redinterna:
