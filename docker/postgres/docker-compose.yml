@@ -2,20 +2,20 @@ version: '3.3'
 services:
   postgresql: # Es único, se puede poner cualquier nombre pero no se puede repetir.
     container_name: postgresql-servidor # Este es opcional. Pero no se puede repetir con otras imágenes.
-    image: postgres:15.4-bullseye
+    image: postgres:16
 
     networks:
       - redinterna
     ports:
-      - '5432:5432'
+      - '5433:5432' # En la izquierda el de docker y en la derecha el de postgress
     environment:
-      - POSTGRES_PASSWORD = ${CONTRASEÑA}
-      - POSTGRES_DB = ${BASE_DE_DATOS}
-      - POSTGRES_USER = ${USUARIO}
-      - PGDATA = /var/lib/postgresql/data
+      - POSTGRES_PASSWORD=${CONTRA}
+      - POSTGRES_DB=${BASE_DE_DATOS}
+      - POSTGRES_USER=${USUARIO}
+      - PGDATA=/var/lib/postgresql/data
     volumes: # Es lo que vincula es host con el contenedor. Es lo que vincula los datos de la "RAM" y los persiste en el disco.
       # Es buena práctica path relativo desde el proyecto ./_data:/lib/postgresql.
-      - ./_data:/lib/postgresql
+      - ./_data:/var/lib/postgresql
     restart: always # Para que se ejecute cada vez que arranca Docker.
 
 networks:
