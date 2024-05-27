@@ -1,5 +1,6 @@
 from app.models import Product
 from app.repositories.product_repository import ProductRepository
+# from app import cache
 
 class ProductService:
 
@@ -28,6 +29,7 @@ class ProductService:
         return self.__repo.find_by_serial_number(serial_number)
     
     def create(self, entity: Product) -> Product:
+        # cache.set(self.__repo.id, self.__repo(entity), timeout=50)
         return self.__repo.create(entity)
     
     def update(self, entity: Product, id:int) -> Product:

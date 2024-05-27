@@ -6,6 +6,7 @@ services:
 
     networks:
       - redinterna
+    # command: para agregar parámetros al iniciar el contenedor.
     ports:
       - '5433:5432' # En la izquierda el de docker y en la derecha el de postgress
     environment:
