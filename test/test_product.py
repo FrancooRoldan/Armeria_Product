@@ -32,7 +32,6 @@ class ProductTestCase(unittest.TestCase):
     def test_find_by_id(self):
         product = self.__create_product()
         service.find_by_id(1)
-        # self.assertIsNone(product)
         self.assertEqual(product.name, 'Pistola')
         self.assertEqual(product.caliber, '9mm')
         self.assertEqual(product.brand, 'Beretta')
