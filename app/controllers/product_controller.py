@@ -22,14 +22,6 @@ def find_by_id(id):
     resp.status_code = 200
     return resp
 
-@product.route('/product/create/', methods=['POST'])
-def create_product():
-    product = product_schema.load(request.json)
-    response = product_schema.dump(service.create(product))
-    resp = jsonify(response)
-    resp.status_code = 200
-    return resp
-
 @product.route('/product/name/', methods=['GET'])
 def find_by_name():
     name = request.args.get('name')
@@ -39,9 +31,38 @@ def find_by_name():
     resp.status_code = 200
     return resp
 
-@product.route('/product/email/<string:email>', methods=['GET'])
-def find_by_email(email):
-    response = product_schema.dump(service.find_by_email(email))
+@product.route('/product/caliber/<string:caliber>', methods=['GET'])
+def find_by_caliber(caliber):
+    response = product_schema.dump(service.find_by_caliber(caliber))
+    resp = jsonify(response)
+    resp.status_code = 200
+    return resp
+
+@product.route('/product/brand/<string:brand>', methods=['GET'])
+def find_by_brand(brand):
+    response = product_schema.dump(service.find_by_brand(brand))
+    resp = jsonify(response)
+    resp.status_code = 200
+    return resp
+
+@product.route('/product/type/<string:type>', methods=['GET'])
+def find_by_type(type):
+    response = product_schema.dump(service.find_by_type(type))
+    resp = jsonify(response)
+    resp.status_code = 200
+    return resp
+
+@product.route('/product/serial_number/<string:serial_number>', methods=['GET'])
+def find_by_serial_number(serial_number):
+    response = product_schema.dump(service.find_by_serial_number(serial_number))
+    resp = jsonify(response)
+    resp.status_code = 200
+    return resp
+
+@product.route('/product/create/', methods=['POST'])
+def create_product():
+    product = product_schema.load(request.json)
+    response = product_schema.dump(service.create(product))
     resp = jsonify(response)
     resp.status_code = 200
     return resp

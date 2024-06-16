@@ -1,0 +1,72 @@
+services:
+    reverse-proxy:
+        image: traefik:v2.11
+        container_name: traefik
+        restart: unless-stopped
+        security_opt:
+            - no-new-privileges:true
+        ports:
+            - 80:80
+            - 443:443
+            - 6379:6379 #redis
+            - 5432:5432 #postgres
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - ./_config/traefik.yml:/etc/traefik/traefik.yml:ro
+            - ./_config/config.yml:/etc/traefik/config.yml:ro
+            - ./_certs:/etc/certs:ro
+        networks:
+            - mired
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.traefik=true"
+networks:
+    mired:
+        external: true
+
+# Para instalar certificados en la terminal hay que poner:
+# mkcert -cert-file _certs/um-cert.pem -key-file _certs/um-key.pem "um.localhost" "*.um.localhost"
+
+
+    # ms:
+    #     image: ms:v1.1.0
+    #     networks:
+    #         mired:
+    #             aliases:
+    #                 - ms.um.localhost
+    #     labels:
+    #         - "traefik.enable=true"
+    #         - "traefik.http.routers.ms.rule=Host(`ms.um.localhost`)"
+    #         - "traefik.http.routers.ms.tls=true"
+    #         - "traefik.http.services.ms.loadbalancer.server.port=5000"
+    #         - "traefik.docker.network=mired"
+    #         - "traefik.http.middlewares.ms.circuitbreaker.expression=LatencyAtQuantileMS(50.0) > 100"
+    #         - "traefik.http.middlewares.ms.circuitbreaker.expression=ResponseCodeRatio(500, 600, 0, 600) > 0.25"
+    #         - "traefik.http.middlewares.ms.circuitbreaker.expression=NetworkErrorRatio() > 0.5"
+    
+    #orquestador:
+    #    image: orquestador:v1.0.0
+    #    environment:
+    #        - VAR CONTEXT=${VAR CONTEXT}
+    #        - REDIS_HOST=${REDIS_HOST}
+    #        - REDIS_PORT=${REDIS_PORT}
+    #        - REDIS_PASSWORD=${REDIS_PASSWORD}
+    #        - REDIS_DB=${REDIS_DB}
+    #        - MS1_URL=${MS1_URL}
+#    redis:
+#      image: redis:7-bookworm
+#      container_name: redis
+#      restart: always
+#      volumes:
+#        - ./data:/data
+#        - ./data/redis.conf:/data/redis.conf
+#      command: redis-server /data/redis.conf --loglevel notice --requirepass ${}
+
+
+#Redis
+#labels:
+#- "traefik.enable=true"
+#- "traefik.tcp.routers.redis.rule=HostSNI(*)"
+#- "traefik.tcp.routers.redis.entryPoints=redis"
+#- "traefik.tcp.routers.redis.service=redis"
+#- "traefik.tcp.routers.redis.loadbalancer.server.port=6379"
