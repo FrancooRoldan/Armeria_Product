@@ -1,5 +1,5 @@
 from app.models import Product
-from app.config.database import db
+from app import db
 from .CRUD import Create, Read, Update, Delete
 
 class ProductRepository(Create, Read, Update, Delete):

@@ -1,4 +1,4 @@
-from app.config.database import db
+from app import db
 from sqlalchemy.ext.hybrid import hybrid_property
 
 class Product(db.Model):

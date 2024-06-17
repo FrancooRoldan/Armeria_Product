@@ -1,11 +1,12 @@
 from flask import Flask
-from flask_cors import CORS
 from app.config.database import *
-from app.models import *
 from flask_caching import Cache
 from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
 from app.controllers import product
+from app.config import database
+# from app.models import Product
+# from flask_cors import CORS
 
 ma = Marshmallow()
 db = SQLAlchemy()

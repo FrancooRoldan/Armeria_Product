@@ -7,7 +7,7 @@ services:
       - ./data/redis.conf:/data/redis.conf
     command: redis-server /data/redis.conf --loglevel notice --requirepass ${REDIS_PASSWORD}
     ports:
-      - "6379:6379"
+      - "6379:6379" # En la izquierda el de docker y en la derecha el de redis
     networks:
       - mired
 
