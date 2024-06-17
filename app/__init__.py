@@ -3,7 +3,6 @@ from app.config.database import *
 from flask_caching import Cache
 from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
-from app.controllers import product
 from app.config import database
 # from app.models import Product
 # from flask_cors import CORS
@@ -32,7 +31,8 @@ def create_app():
                               ,'CACHE_REDIS_PORT':'6379','CACHE_REDIS_DB':'0',
                               'CACHE_REDIS_PASSWORD':'admin',
                               'CACHE_KEY_PREFIX':'armeria-product_'})
-
+  
+  from app.controllers import product
   app.register_blueprint(product, url_prefix='/api/v1')
 
   @app.shell_context_processor # PREGUNTAR QUE HACE ESTO

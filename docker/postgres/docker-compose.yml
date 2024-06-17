@@ -5,7 +5,7 @@ services:
     image: postgres:16
 
     networks:
-      - redinterna
+      - mired
     # command: para agregar parámetros al iniciar el contenedor.
     ports:
       - '5433:5432' # En la izquierda el de docker y en la derecha el de postgress
@@ -20,4 +20,4 @@ services:
     restart: always # Para que se ejecute cada vez que arranca Docker.
 
 networks:
-  redinterna:
+  mired:
