@@ -23,6 +23,7 @@ services:
 networks:
     mired:
         external: true
+        driver: bridge
 
 # Para instalar certificados en la terminal hay que poner:
 # mkcert -cert-file _certs/um-cert.pem -key-file _certs/um-key.pem "um.localhost" "*.um.localhost"
