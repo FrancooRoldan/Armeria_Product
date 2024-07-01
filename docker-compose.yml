@@ -1,7 +1,7 @@
 services:
     armeria-product:
     #container_name: micro1  no tiene que estar porque no se puede escalar
-        image: msproduct:v1.0.1
+        image: msproduct:v1.0.2
         networks:
             mired:
                 aliases: #Es para cuando quiera encontrar a un microservicio que se ejecute. Le agrego un nombre a una ip
