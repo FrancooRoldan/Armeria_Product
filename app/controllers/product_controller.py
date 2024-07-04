@@ -33,21 +33,24 @@ def find_by_name():
 
 @product.route('/caliber/<string:caliber>', methods=['GET'])
 def find_by_caliber(caliber):
-    response = product_schema.dump(service.find_by_caliber(caliber))
+    list = service.find_by_caliber(caliber)
+    response = product_schema_many.dump(list)
     resp = jsonify(response)
     resp.status_code = 200
     return resp
 
 @product.route('/brand/<string:brand>', methods=['GET'])
 def find_by_brand(brand):
-    response = product_schema.dump(service.find_by_brand(brand))
+    list = service.find_by_brand(brand)
+    response = product_schema_many.dump(list)
     resp = jsonify(response)
     resp.status_code = 200
     return resp
 
 @product.route('/type/<string:type>', methods=['GET'])
 def find_by_type(type):
-    response = product_schema.dump(service.find_by_type(type))
+    list = service.find_by_type(type)
+    response = product_schema_many.dump(list)
     resp = jsonify(response)
     resp.status_code = 200
     return resp
