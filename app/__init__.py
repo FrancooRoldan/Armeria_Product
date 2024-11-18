@@ -27,7 +27,7 @@ def create_app():
   migrate.init_app(app, db)
 
   cache.init_app(app, config={'CACHE_TYPE': 'RedisCache'
-                              ,'CACHE_DEFAULT_TIMEOUT':300, 'CACHE_REDIS_HOST':'localhost' #nombre del contenedor
+                              ,'CACHE_DEFAULT_TIMEOUT':300, 'CACHE_REDIS_HOST':'redis' #nombre del contenedor
                               ,'CACHE_REDIS_PORT':'6379','CACHE_REDIS_DB':'0',
                               'CACHE_REDIS_PASSWORD':'admin',
                               'CACHE_KEY_PREFIX':'armeria-product_'})
